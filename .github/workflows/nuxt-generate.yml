@@ -30,12 +30,14 @@ jobs:
         run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
       - name: Check out the repo
         uses: actions/checkout@v3
-      - name: Run the build process with Docker
+      - name: Run the static site generate process with Docker
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/scj2000/scj2000-web-v2/scj2000-web:latest
           options: >
-            -v ${{ github.workspace }}:/frontend/.output/
+            -v ${{ github.workspace }}/public/:/frontend/.output/public/
+            -v ${{ github.workspace }}/server/:/frontend/.output/server/
+            -v ${{ github.workspace }}/nitro.json:/frontend/.output/nitro.json
             -e API_TOKEN="${{ secrets.CMS_API_TOKEN }}"
             -e API_ENDPOINT="${{ env.API_ENDPOINT }}"
             -e CDN_URL="${{ env.CDN_URL }}"
