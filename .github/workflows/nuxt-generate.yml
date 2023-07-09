@@ -29,7 +29,7 @@ jobs:
       - name: Set current date as env variable
         run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Run the build process with Docker
         uses: addnab/docker-run-action@v3
         with:
@@ -43,12 +43,10 @@ jobs:
             -e GTM_ID="${{ env.GTM_ID }}"
           run: npm run regenerate
       - name: Add and commit generated HTML
-        uses: EndBug/add-and-commit@v9
-        with:
-          author_name: "scj2000 content update"
-          author_email: "webmaster@scj2000.net"
-          message: "Content update $NOW"
-          cwd: ${{ github.workspace }}
-          push: true
-          new_branch: test
-        
+        run: |
+          git config --global user.name 'scj2000 content update'
+          git config --global user.email 'webmaster@scj2000.net'
+          git remote set-url origin https://x-access-token:${{ secrets.PAT }}@github.com/${{ github.repository }}
+          git commit -am "Content update $NOW"
+          git push
+  
