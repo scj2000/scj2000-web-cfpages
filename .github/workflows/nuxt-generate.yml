@@ -49,5 +49,6 @@ jobs:
           author_name: "scj2000 content update"
           author_email: "webmaster@scj2000.net"
           message: "Content update $NOW"
+          cwd: ${{ github.workspace }}
           push: true
         
