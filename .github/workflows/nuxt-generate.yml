@@ -35,7 +35,7 @@ jobs:
         with:
           image: ghcr.io/scj2000/scj2000-web-v2/scj2000-web:latest
           options: >
-            -v ${{ github.workspace }}/public/:/frontend/.output/public/
+            -v ${{ github.workspace }}/output/:/frontend/.output/
             -e API_TOKEN="${{ secrets.CMS_API_TOKEN }}"
             -e API_ENDPOINT="${{ env.API_ENDPOINT }}"
             -e CDN_URL="${{ env.CDN_URL }}"
