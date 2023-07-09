@@ -1,3 +1,0 @@
-User-agent: *
-
-Sitemap: https://www.scj2000.net/sitemap.xml
