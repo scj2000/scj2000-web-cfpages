@@ -44,6 +44,9 @@ jobs:
           run: npm run regenerate
       - name: Add and commit generated HTML
         run: |
+          pwd
+          cd ${{ github.workspace }}
+          pwd
           git config --global user.name 'scj2000 content update'
           git config --global user.email 'webmaster@scj2000.net'
           git remote set-url origin https://x-access-token:${{ secrets.PAT }}@github.com/${{ github.repository }}
