@@ -17,18 +17,8 @@ on:
       - webhook
 
 jobs:
-  checkout:
-    name: Checkout    
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set current date as env variable
-        run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
-      - name: Check out the repo
-        uses: actions/checkout@v3
-  
   generate-static-html:
     name: Generate static HTML files
-    needs: checkout
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/scj2000/scj2000-web-v2/scj2000-web:latest
@@ -45,12 +35,24 @@ jobs:
         run: |
           cd /frontend
           npm run regenerate
+      - uses: actions/upload-artifact@master
+        with:
+          name: output-html
+          path: ${{ github.workspace }}/output/
 
   commit:
     name: Commit changes
-    needs: [checkout, generate-static-html] 
+    needs: generate-static-html
     runs-on: ubuntu-latest
     steps:
+      - name: Set current date as env variable
+        run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - uses: actions/download-artifact@master
+        with:
+          name: output-html
+          path: ${{ github.workspace }}/output/
       - name: Add and commit generated HTML
         run: |
           cd ${{ github.workspace }}
