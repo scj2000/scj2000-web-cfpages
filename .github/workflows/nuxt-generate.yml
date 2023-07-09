@@ -28,6 +28,7 @@ jobs:
   
   generate-static-html:
     name: Generate static HTML files
+    needs: checkout
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/scj2000/scj2000-web-v2/scj2000-web:latest
@@ -43,7 +44,8 @@ jobs:
         run: npm run regenerate
 
   commit:
-    name: Commit changes    
+    name: Commit changes
+    needs: [checkout, generate-static-html] 
     runs-on: ubuntu-latest
     steps:
       - name: Add and commit generated HTML
