@@ -45,10 +45,10 @@ jobs:
       - name: Add and commit generated HTML
         uses: EndBug/add-and-commit@v9
         with:
-          add: .
           author_name: "scj2000 content update"
           author_email: "webmaster@scj2000.net"
           message: "Content update $NOW"
           cwd: ${{ github.workspace }}
           push: true
+          new_branch: test
         
