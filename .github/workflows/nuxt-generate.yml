@@ -42,7 +42,9 @@ jobs:
         GTM_ID: "${{ vars.GTM_ID }}"
     steps:
       - name: Run the static site generate process with Docker
-        run: npm run regenerate
+        run: |
+          cd /frontend
+          npm run regenerate
 
   commit:
     name: Commit changes
