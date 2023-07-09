@@ -13,8 +13,8 @@ on:
   workflow_dispatch:
   # Allows external webhook trigger
   repository_dispatch:
-        types:
-          - webhook
+    types:
+      - webhook
 env:
   API_ENDPOINT: "${{ vars.CMS_API_ENDPOINT }}"
   CDN_URL: "${{ vars.CDN_URL }}"
