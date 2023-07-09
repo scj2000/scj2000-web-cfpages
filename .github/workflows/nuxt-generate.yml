@@ -32,7 +32,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/scj2000/scj2000-web-v2/scj2000-web:latest
-      volumes: ${{ github.workspace }}/output/:/frontend/.output/
+      volumes:
+        - ${{ github.workspace }}/output/:/frontend/.output/
       env:
         API_TOKEN: ${{ secrets.CMS_API_TOKEN }}
         API_ENDPOINT: "${{ vars.CMS_API_ENDPOINT }}"
