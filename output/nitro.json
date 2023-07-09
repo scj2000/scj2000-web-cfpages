@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "date": "2023-07-09T14:37:21.529Z",
-=======
-  "date": "2023-07-09T14:19:27.424Z",
->>>>>>> 2126578d20706859b315916f050f6f925cd265dc
+  "date": "2023-07-09T15:21:25.961Z",
   "preset": "nitro-prerender",
   "commands": {
     "preview": "npx serve ./public"
